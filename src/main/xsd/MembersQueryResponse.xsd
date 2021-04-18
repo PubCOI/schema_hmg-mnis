@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright 2021 PubCOI.org
+  ~
+  ~ This program is free software; you can redistribute it and/or
+  ~ modify it under the terms of the GNU Lesser General Public
+  ~ License as published by the Free Software Foundation; either
+  ~ version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with this program; if not, write to the Free Software Foundation,
+  ~ Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+           jaxb:version="2.1"
+           elementFormDefault="qualified">
+
+    <xs:annotation>
+        <xs:documentation>
+            Schema for pulling MNIS data; sample query:
+            http://data.parliament.uk/membersdataplatform/services/mnis/members/query/House=Commons/
+        </xs:documentation>
+    </xs:annotation>
+
+    <!--    <xs:element name="Members" type="MnisMembersType"/>-->
+
+    <xs:element name="Members">
+        <xs:annotation>
+            <xs:appinfo>
+                <jaxb:class name="MnisMembersType"/>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Member" type="MnisMemberType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="MnisMemberType">
+        <xs:sequence>
+            <xs:element name="DisplayAs" type="xs:token"/>
+            <xs:element name="ListAs" type="xs:token"/>
+            <xs:element name="FullTitle" type="xs:token"/>
+            <xs:element name="Gender" type="MnisGenderType"/>
+            <xs:element name="Party" type="MnisPartyType"/>
+            <xs:element name="House" type="MnisHouseType"/>
+            <xs:element name="MemberFrom" type="xs:token"/>
+            <xs:element name="HouseStartDate" type="xs:dateTime"/>
+            <xs:element name="HouseEndDate" type="xs:dateTime" nillable="true"/>
+            <xs:element name="CurrentStatus" type="MnisCurrentStatusType" nillable="true"/>
+            <xs:element name="Interests" type="MnisInterestsType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Member_Id" type="xs:int"/>
+        <xs:attribute name="Dods_Id" type="xs:int"/>
+        <xs:attribute name="Pims_Id" type="xs:int"/>
+        <xs:attribute name="Clerks_Id" type="xs:int"/>
+    </xs:complexType>
+
+    <xs:simpleType name="MnisGenderType">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="F"/>
+            <xs:enumeration value="M"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="MnisPartyType">
+        <xs:simpleContent>
+            <xs:extension base="xs:token">
+                <xs:attribute name="Id" type="xs:int"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:simpleType name="MnisHouseType">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="Commons"/>
+            <xs:enumeration value="Lords"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="MnisCurrentStatusType">
+        <xs:sequence>
+            <xs:element name="Name" type="xs:token"/>
+<!--            <xs:element name="Reason" type="xs:anyType">-->
+<!--                <xs:annotation>-->
+<!--                    <xs:documentation>-->
+<!--                        Unable to determine data type from sample data-->
+<!--                    </xs:documentation>-->
+<!--                </xs:annotation>-->
+<!--            </xs:element>-->
+            <xs:element name="StartDate" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MnisInterestsType">
+        <xs:sequence>
+            <xs:element name="Category" type="MnisInterestCategoryType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MnisInterestCategoryType">
+        <xs:sequence>
+            <xs:element name="Interest" type="MnisInterestType" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="Id" type="xs:int"/>
+        <xs:attribute name="Name" type="xs:token">
+            <xs:annotation>
+                <xs:documentation>
+                    TODO: Find a definitive list of all Name values so we can turn this into an enum
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="MnisInterestType">
+        <xs:sequence>
+            <xs:element name="RegisteredInterest" type="xs:token"/>
+            <xs:element name="RegisteredLate" type="xs:boolean"/>
+            <xs:element name="Created" type="xs:dateTime"/>
+            <xs:element name="Amended" type="xs:dateTime" nillable="true"/>
+            <xs:element name="Deleted" type="xs:dateTime" nillable="true"/>
+        </xs:sequence>
+        <xs:attribute name="Id" type="xs:int"/>
+        <xs:attribute name="ParentId" type="xs:int"/>
+        <xs:attribute name="LastAmendment" type="xs:dateTime"/>
+        <xs:attribute name="LastAmendmentType" type="MnisInterestAmendmentType"/>
+    </xs:complexType>
+
+    <xs:simpleType name="MnisInterestAmendmentType">
+        <xs:restriction base="xs:token">
+            <xs:annotation>
+                <xs:documentation>
+                    Believed this refers to the Created (C) / Updated (U) / Deleted (D)
+                </xs:documentation>
+            </xs:annotation>
+            <xs:enumeration value="C"/>
+            <xs:enumeration value="U"/>
+            <xs:enumeration value="D"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
