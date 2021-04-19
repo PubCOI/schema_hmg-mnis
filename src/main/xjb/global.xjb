@@ -26,5 +26,32 @@
         <jaxb:schemaBindings>
             <jaxb:package name="org.pubcoi.cdm.mnis"/>
         </jaxb:schemaBindings>
+        <jaxb:bindings node="//xs:element[@name='Members']//xs:element[@name='Member']">
+            <jaxb:property name="members"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='MnisInterestsType']//xs:element[@name='Category']">
+            <jaxb:property name="categories"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='MnisInterestCategoryType']//xs:element[@name='Interest']">
+            <jaxb:property name="interests"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='MnisInterestCategoryType']/xs:attribute[@name='Id']">
+            <jaxb:property name="categoryId"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='MnisInterestCategoryType']/xs:attribute[@name='Name']">
+            <jaxb:property name="categoryName"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='MnisInterestType']//xs:element[@name='Created']">
+            <jaxb:property name="createdDT"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='MnisInterestType']//xs:element[@name='Amended']">
+            <jaxb:property name="amendedDT"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='MnisInterestType']//xs:element[@name='Deleted']">
+            <jaxb:property name="deletedDT"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='MnisInterestType']/xs:attribute[@name='LastAmendment']">
+            <jaxb:property name="lastAmendmentDT"/>
+        </jaxb:bindings>
     </jaxb:bindings>
 </jaxb:bindings>
