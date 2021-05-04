@@ -23,7 +23,7 @@
 
     <groupId>org.pubcoi.schemas</groupId>
     <artifactId>hmg-mnis</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <name>HMG Members Data Platform Schema</name>
     <url>https://github.com/PubCOI/schema_hmg-mnis</url>
@@ -33,7 +33,7 @@
         <connection>scm:git:git@github.com:PubCOI/schema_hmg-mnis.git</connection>
         <developerConnection>scm:git:git@github.com:PubCOI/schema_hmg-mnis.git</developerConnection>
         <url>https://github.com/PubCOI/schema_hmg-mnis</url>
-      <tag>hmg-mnis-1.0.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <licenses>
