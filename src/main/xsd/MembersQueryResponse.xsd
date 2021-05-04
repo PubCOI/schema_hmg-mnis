@@ -30,8 +30,6 @@
         </xs:documentation>
     </xs:annotation>
 
-    <!--    <xs:element name="Members" type="MnisMembersType"/>-->
-
     <xs:element name="Members">
         <xs:annotation>
             <xs:appinfo>

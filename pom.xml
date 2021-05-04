@@ -18,7 +18,8 @@
   ~ Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.pubcoi.schemas</groupId>
@@ -33,7 +34,7 @@
         <connection>scm:git:git@github.com:PubCOI/schema_hmg-mnis.git</connection>
         <developerConnection>scm:git:git@github.com:PubCOI/schema_hmg-mnis.git</developerConnection>
         <url>https://github.com/PubCOI/schema_hmg-mnis</url>
-  </scm>
+    </scm>
 
     <licenses>
         <license>
@@ -199,9 +200,9 @@
                         </goals>
                         <configuration>
                             <rules>
-                                <banDuplicatePomDependencyVersions />
-                                <dependencyConvergence />
-                                <requireReleaseDeps />
+                                <banDuplicatePomDependencyVersions/>
+                                <dependencyConvergence/>
+                                <requireReleaseDeps/>
                                 <requireMavenVersion>
                                     <version>[3.5,)</version>
                                 </requireMavenVersion>
